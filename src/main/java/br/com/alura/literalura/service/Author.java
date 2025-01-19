@@ -1,8 +1,15 @@
 package br.com.alura.literalura.service;
 
 import com.google.gson.annotations.SerializedName;
+import jakarta.persistence.*;
+import java.util.List;
 
+@Entity
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @SerializedName("name")
     private String name;
@@ -13,7 +20,18 @@ public class Author {
     @SerializedName("death_year")
     private Integer deathYear;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> books;
+
     // Getters e setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -37,5 +55,17 @@ public class Author {
     public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
     }
-}
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public boolean isEmpty() {
+        return name == null || name.trim().isEmpty();
+    }
+
+}
