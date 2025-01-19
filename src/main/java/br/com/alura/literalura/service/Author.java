@@ -20,6 +20,9 @@ public class Author {
     @SerializedName("death_year")
     private Integer deathYear;
 
+    @SerializedName("author_id")
+    private Long authorId;
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> books;
 
@@ -31,6 +34,16 @@ public class Author {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+
 
     public String getName() {
         return name;

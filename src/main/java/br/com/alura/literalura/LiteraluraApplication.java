@@ -4,12 +4,15 @@ package br.com.alura.literalura;
 //import br.com.alura.literalura.service.AutorRepository;
 //import br.com.alura.literalura.service.LivroRepository;
 import br.com.alura.literalura.service.ConsomeAPI;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -51,6 +54,9 @@ public class LiteraluraApplication implements CommandLineRunner {
 						try {
 							System.out.print("Digite o título do livro: ");
 							String titulo = scanner.nextLine();
+
+							if (Objects.equals(titulo, "f")) break;
+
 							var json = consomeAPI.obterDados(titulo);
 							System.out.println("=========================================");
 							System.out.println(json);
@@ -62,11 +68,12 @@ public class LiteraluraApplication implements CommandLineRunner {
 						}
 					}
 				}
-				case 2 ->
+				case 2 -> {
 					var json = consomeAPI.listarLivros();
 					System.out.println("=========================================");
 					System.out.println(json);
 					System.out.println("=========================================");
+				}
 				case 3 -> {
 					var json = consomeAPI.listarAutores();
 					System.out.println("=========================================");
@@ -90,6 +97,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 					System.out.println(json);
 					System.out.println("=========================================");
 				}
+
 				default -> System.out.println("Opção inválida. Tente novamente.");
 			}
 		}
