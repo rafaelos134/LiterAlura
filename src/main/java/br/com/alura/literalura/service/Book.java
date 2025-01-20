@@ -2,6 +2,7 @@ package br.com.alura.literalura.service;
 
 import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ import java.util.List;
 //import javax.persistence.ManyToOne;
 
 @Entity
+@Table(name = "Book")
+@Transactional
 public class Book  {
 
     @Id
@@ -33,23 +36,25 @@ public class Book  {
     @SerializedName("author_id")
     private Long authorId;
 
+    @SerializedName("idoma")
+    private String idioma;
 
     //    @JoinColumn(name = "author")
 //    private Author author;
 
-//    @ManyToOne()
+    //    @ManyToOne()
     @ElementCollection
     @SerializedName("authors")
     private List<Author> author;
 
     // Getters e setters
-//    public Long getId() {
-//        return id;
-//    }
+    public Long getId() {
+        return id;
+    }
 
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -97,5 +102,13 @@ public class Book  {
 
     public Long getAuthorId() {
         return authorId;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
     }
 }

@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,9 +29,12 @@ public class ConsomeAPI {
 
         //unico erro, consertando pode enviar
         if (livroExistente != null) {
+            Long idBook = livroExistente.getId();
+            Optional<Author> autorExistenteProv = autorRepository.findById(idBook);
+
             return "Livro encontrado no banco de dados:\nTítulo: " + livroExistente.getTitle()+
-                    "\nAutor: " + livroExistente.getAuthor().get(0).getName() +
-                    "\nIdioma/: " + livroExistente.getLanguages() +
+                    "\nAutor: " + autorExistenteProv.get().getName() +
+                    "\nIdioma: " + livroExistente.getIdioma()+
                     "\nNúmero de Downloads: " + livroExistente.getDownloadCount();
         }
 
@@ -97,13 +101,14 @@ public class ConsomeAPI {
 
             Book libros = livroRepository.findByTitle(nomeLivro);
             if (libros == null) {
-            Book novoLivro = new Book();
-            novoLivro.setAuthorId(authorId);
-            novoLivro.setTitle(title);
+                Book novoLivro = new Book();
+                novoLivro.setAuthorId(authorId);
+                novoLivro.setTitle(title);
+                novoLivro.setIdioma(language);
 //            novoLivro.setAuthor(firstBook.getAuthor());
-            novoLivro.setLanguages(languages);
-            novoLivro.setDownloadCount(numDownloads);
-            livroRepository.save(novoLivro);}
+                novoLivro.setLanguages(languages);
+                novoLivro.setDownloadCount(numDownloads);
+                livroRepository.save(novoLivro);}
 
 
             return "Livro obtido da API e salvo no banco de dados:\nTítulo: " + title +
@@ -152,7 +157,7 @@ public class ConsomeAPI {
 //        return resultado.toString();
 //    }
 
-public String listarAutoresVivosPorAno(int ano) {
+    public String listarAutoresVivosPorAno(int ano) {
         // Obtém todos os autores
         List<Author> autores = autorRepository.findAll();
 

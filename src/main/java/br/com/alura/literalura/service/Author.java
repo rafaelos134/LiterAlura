@@ -2,9 +2,13 @@ package br.com.alura.literalura.service;
 
 import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 @Entity
+@Table(name = "Autores")
+@Transactional
 public class Author {
 
     @Id
