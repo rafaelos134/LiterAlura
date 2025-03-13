@@ -22,7 +22,7 @@ O **LiterAlura** permite as seguintes interações com o usuário:
 
 - **Java**: Linguagem principal para o desenvolvimento do projeto.
 - **API de Livros**: Utilizei uma API pública de livros para consumir dados (detalhes da API podem ser encontrados na seção "Backlog").
-- **Banco de Dados**: Armazenamento dos livros e autores em um banco de dados relacional (MySQL ou PostgreSQL).
+- **Banco de Dados**: Armazenamento dos livros e autores em um banco de dados relacional (PostgreSQL).
 - **JDBC**: Utilizado para integrar o Java com o banco de dados e realizar operações CRUD.
 - **JSON**: Manipulação das respostas da API, que são retornadas em formato JSON.
 - **Console Interativo**: Interface de interação com o usuário via terminal/console.
